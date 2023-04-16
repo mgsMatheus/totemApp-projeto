@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SaudeApplication {
 
-	public static void main(String[] args) {
-
-		SpringApplication.run(SaudeApplication.class, args);
-	}
-
+	public static void main(String[] args) {SpringApplication.run(SaudeApplication.class, args); }
 
 	@GetMapping("/")
 	public String index(){

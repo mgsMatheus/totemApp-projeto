@@ -2,7 +2,7 @@ package br.com.fiap.saude.service;
 
 import br.com.fiap.saude.model.PacienteModel;
 import br.com.fiap.saude.repository.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service

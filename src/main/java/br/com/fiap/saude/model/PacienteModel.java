@@ -20,6 +20,16 @@ public class PacienteModel {
     private String cpf;
 
 
+    public PacienteModel() {}
+    
+    public PacienteModel(UUID id, String nome, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+
+    public PacienteModel(String mariaSilva, String s, String s1, String s2) {
+    }
 
     public UUID getId() {
         return id;
