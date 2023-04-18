@@ -8,10 +8,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class PacienteController {
 
     @PostMapping
     public ResponseEntity<Object> cadastrarPaciente(@RequestBody @Valid PacienteDto pacienteDto){
-      /*  if (pacienteService.existsByCpf(pacienteDto.getCpf())) {
+        /*if (pacienteService.validacao(pacienteDto.getCpf())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Cpf já cadastrado!");
         }*/
 
@@ -39,6 +40,32 @@ public class PacienteController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.cadastrar(pacienteModel));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deletePaciente(@PathVariable(value = "id") UUID id){
+        Optional<PacienteModel> pacienteModelOptional = pacienteService.findById(id);
+        if (!pacienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+        }
+        pacienteService.delete(pacienteModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Paciente deletado com sucesso!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> atualizarPaciante(@PathVariable(value = "id") UUID id,
+                                                    @RequestBody @Valid PacienteDto pacienteDto){
+        Optional<PacienteModel> pacienteModelOptional = pacienteService.findById(id);
+        if (!pacienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não Encontrado!");
+        }
+        var pacienteModel = pacienteModelOptional.get();
+        pacienteModel.setCpf(pacienteDto.getCpf());
+        pacienteModel.setNome(pacienteDto.getNome());
+
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.cadastrar(pacienteModel));
+
+    }
+
     @GetMapping
     public ResponseEntity<List<PacienteModel>> getAllPacientes() {
         return ResponseEntity.status(HttpStatus.OK).body(pacienteService.findAll());
