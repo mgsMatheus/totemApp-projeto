@@ -2,6 +2,7 @@ package br.com.fiap.saude.service;
 
 import br.com.fiap.saude.model.PacienteModel;
 import br.com.fiap.saude.repository.PacienteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
     }
 
+
     public PacienteModel cadastrar(PacienteModel pacienteModel) {
         return pacienteRepository.save(pacienteModel);
     }
@@ -31,6 +33,13 @@ public class PacienteService {
     public Optional<PacienteModel> findById(UUID id) {
         return pacienteRepository.findById(id);
     }
+
+    @Transactional
+    public void delete(PacienteModel pacienteModel) {
+        pacienteRepository.delete(pacienteModel);
+    }
+
+
 
     /*public boolean validacao(String cpf) {
         return pacienteRepository.extistsByCpf(cpf);

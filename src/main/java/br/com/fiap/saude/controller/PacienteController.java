@@ -48,4 +48,29 @@ public class PacienteController {
         return ResponseEntity.status(HttpStatus.OK).body(pacienteModelOptional.get());
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deletePaciente(@PathVariable(value = "id") UUID id){
+        Optional<PacienteModel> pacienteModelOptional = pacienteService.findById(id);
+        if (!pacienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado!");
+        }
+        pacienteService.delete(pacienteModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Paciente deletado com sucesso!");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> atualizarPaciante(@PathVariable(value = "id") UUID id,
+                                                    @RequestBody @Valid PacienteDto pacienteDto){
+        Optional<PacienteModel> pacienteModelOptional = pacienteService.findById(id);
+        if (!pacienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não Encontrado!");
+        }
+        var pacienteModel = pacienteModelOptional.get();
+        pacienteModel.setCpf(pacienteDto.getCpf());
+        pacienteModel.setNome(pacienteDto.getNome());
+
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.cadastrar(pacienteModel));
+
+    }
+
 }
