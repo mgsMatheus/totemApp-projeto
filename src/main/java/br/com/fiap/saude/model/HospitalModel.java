@@ -23,8 +23,8 @@ public class HospitalModel implements Serializable {
     @Column(nullable = false)
     private String horarioFuncionamento;
 
-    @OneToMany(mappedBy = "hospital")
-    private List<ConsultaModel> consultaDisponivel;
+//    @OneToMany(mappedBy = "hospital")
+//    private List<ConsultaModel> consultaDisponivel;
 
     public HospitalModel() {}
 
@@ -34,16 +34,16 @@ public class HospitalModel implements Serializable {
         this.nomeHospital = nomeHospital;
         this.telefone = telefone;
         this.horarioFuncionamento = horarioFuncionamento;
-        this.consultaDisponivel = consultaDisponivel;
+//        this.consultaDisponivel = consultaDisponivel;
     }
 
-    public List<ConsultaModel> getConsultaDisponivel() {
-        return consultaDisponivel;
-    }
-
-    public void setConsultaDisponivel(List<ConsultaModel> consultaDisponivel) {
-        this.consultaDisponivel = consultaDisponivel;
-    }
+//    public List<ConsultaModel> getConsultaDisponivel() {
+//        return consultaDisponivel;
+//    }
+//
+//    public void setConsultaDisponivel(List<ConsultaModel> consultaDisponivel) {
+//        this.consultaDisponivel = consultaDisponivel;
+//    }
 
     public UUID getId() {
         return id;

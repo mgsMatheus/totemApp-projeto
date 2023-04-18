@@ -5,6 +5,7 @@ import br.com.fiap.saude.model.PacienteModel;
 import br.com.fiap.saude.service.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
+    @Autowired
     final PacienteService pacienteService;
 
     public PacienteController(PacienteService pacienteService) {

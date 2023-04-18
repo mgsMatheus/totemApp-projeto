@@ -2,6 +2,7 @@ package br.com.fiap.saude.model;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,10 +27,22 @@ public class MedicoModel implements Serializable {
     @Column(nullable = false)
     private String especialidade;
 
+    @OneToMany(mappedBy = "medico")
+    private List<ConsultaModel> consultaDisponivel;
+
+    public List<ConsultaModel> getConsultaDisponivel() {
+        return consultaDisponivel;
+    }
+
+    public void setConsultaDisponivel(List<ConsultaModel> consultaDisponivel) {
+        this.consultaDisponivel = consultaDisponivel;
+    }
+
     public MedicoModel() {}
     public UUID getId() {
         return id;
     }
+
 
     public void setId(UUID id) {
         this.id = id;

@@ -1,5 +1,6 @@
 package br.com.fiap.saude.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "T_CONSULTA")
+@Table(name = "TB_CONSULTA")
 public class ConsultaModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,15 +26,16 @@ public class ConsultaModel implements Serializable {
     private PacienteModel paciente;
 
     @Column(nullable = false)
-    private LocalDateTime horario;
+    private LocalDateTime dataConsulta;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_id", nullable = false)
     private HospitalModel hospital;
 
-    // construtores, getters e setters aqui
 
+// construtores, getters e setters aqui
 
+    public ConsultaModel() {}
 
     public HospitalModel getHospital() {
         return hospital;
@@ -67,12 +69,12 @@ public class ConsultaModel implements Serializable {
         this.paciente = paciente;
     }
 
-    public LocalDateTime getHorario() {
-        return horario;
+    public LocalDateTime getDataConsulta() {
+        return dataConsulta;
     }
 
-    public void setHorario(LocalDateTime horario) {
-        this.horario = horario;
+    public void setDataConsulta(LocalDateTime dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 
 }
