@@ -22,11 +22,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@EnableSpringDataWebSupport
 @RequestMapping("/consulta")
 public class ConsultaController {
 
-    private final ConsultaService consultaService;
+    final ConsultaService consultaService;
 
     public ConsultaController(ConsultaService consultaService) {
         this.consultaService = consultaService;
@@ -78,4 +77,3 @@ public class ConsultaController {
 //    public ResponseEntity<Void> excluirConsulta(@PathVariable Long id) {
 //        consultaService.excluirConsulta(id);
 //        return ResponseEntity.noContent().build();
-

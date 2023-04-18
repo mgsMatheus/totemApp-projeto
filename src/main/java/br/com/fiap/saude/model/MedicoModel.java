@@ -7,26 +7,18 @@ import java.util.UUID;
 
 @Entity
 @Table(name= "T_MEDICO")
-public class MedicoModel implements Serializable {
-
-
-    private static final long serialVersionUID = 1L;
+public class MedicoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
     @Column(nullable = false, unique = true)
     private String CRM;
-
     @Column(nullable = false, length = 80)
     private String nome;
-
     @Column(nullable = false)
     private String telefone;
-
     @Column(nullable = false)
     private String especialidade;
-
     @OneToMany(mappedBy = "medico")
     private List<ConsultaModel> consultaDisponivel;
 
@@ -37,12 +29,9 @@ public class MedicoModel implements Serializable {
     public void setConsultaDisponivel(List<ConsultaModel> consultaDisponivel) {
         this.consultaDisponivel = consultaDisponivel;
     }
-
-    public MedicoModel() {}
     public UUID getId() {
         return id;
     }
-
 
     public void setId(UUID id) {
         this.id = id;
@@ -80,41 +69,5 @@ public class MedicoModel implements Serializable {
         this.telefone = telefone;
     }
 
-//    @Column(nullable = false)
-//    private String numeroRegistro;
-
-//    @ManyToOne
-//    @JoinColumn(name = "hospital_id")
-//    private HospitalModel hospital;
-
-//    @ElementCollection
-//    private List<LocalDateTime> horariosDisponiveis;
-
-    // Construtores, getters e setters
-
-
-//    public String getNumeroRegistro() {
-//        return numeroRegistro;
-//    }
-//
-//    public void setNumeroRegistro(String numeroRegistro) {
-//        this.numeroRegistro = numeroRegistro;
-//    }
-//
-//    public HospitalModel getHospital() {
-//        return hospital;
-//    }
-//
-//    public void setHospital(HospitalModel hospital) {
-//        this.hospital = hospital;
-//    }
-//
-//    public List<LocalDateTime> getHorariosDisponiveis() {
-//        return horariosDisponiveis;
-//    }
-//
-//    public void setHorariosDisponiveis(List<LocalDateTime> horariosDisponiveis) {
-//        this.horariosDisponiveis = horariosDisponiveis;
-//    }
 }
 

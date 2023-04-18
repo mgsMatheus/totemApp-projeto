@@ -76,5 +76,4 @@ public class ConsultaModel implements Serializable {
     public void setDataConsulta(LocalDateTime dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
-
 }

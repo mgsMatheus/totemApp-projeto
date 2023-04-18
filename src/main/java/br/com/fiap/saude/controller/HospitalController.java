@@ -34,7 +34,7 @@ public class HospitalController {
     }
 
     @GetMapping
-    public ResponseEntity<List<HospitalModel>> getMedicos() {
+    public ResponseEntity<List<HospitalModel>> getHospital() {
         return ResponseEntity.status(HttpStatus.OK).body(hospitalService.findAll());
     }
 
