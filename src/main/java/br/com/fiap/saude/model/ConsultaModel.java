@@ -33,6 +33,8 @@ public class ConsultaModel implements Serializable {
 
     // construtores, getters e setters aqui
 
+
+
     public HospitalModel getHospital() {
         return hospital;
     }
@@ -72,4 +74,5 @@ public class ConsultaModel implements Serializable {
     public void setHorario(LocalDateTime horario) {
         this.horario = horario;
     }
+
 }

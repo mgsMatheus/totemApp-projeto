@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/paciente")
@@ -31,5 +36,18 @@ public class PacienteController {
         BeanUtils.copyProperties(pacienteDto, pacienteModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.cadastrar(pacienteModel));
+    }
+    @GetMapping
+    public ResponseEntity<List<PacienteModel>> getAllPacientes() {
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOnePaciente(@PathVariable(value = "id")UUID id) {
+        Optional<PacienteModel> pacienteModelOptional = pacienteService.findById(id);
+        if (!pacienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteModelOptional.get());
     }
 }

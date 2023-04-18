@@ -1,4 +1,5 @@
 package br.com.fiap.saude.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,10 +21,21 @@ public class HospitalModel implements Serializable {
     @Column(nullable = false)
     private String telefone;
     @Column(nullable = false)
-    private LocalDateTime horarioFuncionamento;
+    private String horarioFuncionamento;
 
     @OneToMany(mappedBy = "hospital")
     private List<ConsultaModel> consultaDisponivel;
+
+    public HospitalModel() {}
+
+    public HospitalModel(UUID id, String endereco, String nomeHospital, String telefone, String horarioFuncionamento, List<ConsultaModel> consultaDisponivel) {
+        this.id = id;
+        this.endereco = endereco;
+        this.nomeHospital = nomeHospital;
+        this.telefone = telefone;
+        this.horarioFuncionamento = horarioFuncionamento;
+        this.consultaDisponivel = consultaDisponivel;
+    }
 
     public List<ConsultaModel> getConsultaDisponivel() {
         return consultaDisponivel;
@@ -65,11 +77,11 @@ public class HospitalModel implements Serializable {
         this.telefone = telefone;
     }
 
-    public LocalDateTime getHorarioFuncionamento() {
+    public String getHorarioFuncionamento() {
         return horarioFuncionamento;
     }
 
-    public void setHorarioFuncionamento(LocalDateTime horarioFuncionamento) {
+    public void setHorarioFuncionamento(String horarioFuncionamento) {
         this.horarioFuncionamento = horarioFuncionamento;
     }
 }

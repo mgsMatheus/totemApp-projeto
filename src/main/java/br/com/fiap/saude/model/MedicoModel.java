@@ -27,14 +27,6 @@ public class MedicoModel implements Serializable {
     private String especialidade;
 
     public MedicoModel() {}
-
-    public MedicoModel(UUID id, String CRM, String nome, String telefone, String especialidade) {
-        this.id = id;
-        this.CRM = CRM;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.especialidade = especialidade;
-    }
     public UUID getId() {
         return id;
     }

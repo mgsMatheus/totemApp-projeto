@@ -2,6 +2,7 @@ package br.com.fiap.saude.controller;
 
 import br.com.fiap.saude.dtos.MedicoDto;
 import br.com.fiap.saude.model.MedicoModel;
+import br.com.fiap.saude.model.PacienteModel;
 import br.com.fiap.saude.service.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -9,10 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
-
     final MedicoService medicoService;
 
     public MedicoController(MedicoService medicoService) {
@@ -27,22 +31,21 @@ public class MedicoController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(medicoService.cadastrar(medicoModel));
     }
+
+    @GetMapping
+    public ResponseEntity<List<MedicoModel>> getMedicos() {
+        return ResponseEntity.status(HttpStatus.OK).body(medicoService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getMedicoByID(@PathVariable(value = "id") UUID id) {
+        Optional<MedicoModel> medicoModelOptional = medicoService.findById(id);
+        if (!medicoModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medico não encontrado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(medicoModelOptional.get());
+    }
 }
-//    //model.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-//    @GetMapping
-//    public Iterable<MedicoModel> obterTodosMedicos() {
-//        return medicoRepository.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<MedicoModel> obterMedicoPorId(@PathVariable Long id) {
-//        Optional<MedicoModel> medico = medicoRepository.findById(id);
-//        if (medico.isPresent()) {
-//            return ResponseEntity.ok(medico.get());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 //
 //    @PutMapping("/{id}")
 //    public ResponseEntity<MedicoModel> atualizarMedico(@PathVariable Long id, @RequestBody MedicoModel medicoAtualizado) {
@@ -70,5 +73,3 @@ public class MedicoController {
 //        }
 //    }
 //}
-//
-//

@@ -5,6 +5,10 @@ import br.com.fiap.saude.repository.PacienteRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class PacienteService {
 
@@ -17,6 +21,14 @@ public class PacienteService {
     public PacienteModel cadastrar(PacienteModel pacienteModel) {
         return pacienteRepository.save(pacienteModel);
     }
+    public List<PacienteModel> findAll() {
+        return pacienteRepository.findAll();
+    }
+
+    public Optional<PacienteModel> findById(UUID id) {
+        return pacienteRepository.findById(id);
+    }
+
 
     /*public boolean existsByCpf(String cpf) {
         return pacienteRepository.extistsByCpf(cpf);
